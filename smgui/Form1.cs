@@ -14,7 +14,7 @@ namespace smgui;
 [DesignerGenerated]
 public class Form1 : Form
 {
-	private IContainer components;
+	private readonly IContainer components;
 
 	[AccessedThroughProperty("TextBox1")]
 	private TextBox _TextBox1;
@@ -74,10 +74,8 @@ public class Form1 : Form
 	private Process _sm;
 
 	private string romdir;
-
-	private FolderBrowserDialog setromdir;
-
-	private string r;
+    private string r;
+    private readonly FolderBrowserDialog setromdir;
 
 	internal virtual TextBox TextBox1
 	{
@@ -406,7 +404,7 @@ public class Form1 : Form
 		}
 	}
 
-	private virtual Process sm
+	public virtual Process Sm
 	{
 		[DebuggerNonUserCode]
 		get
@@ -425,7 +423,7 @@ public class Form1 : Form
 	{
 		base.Load += Form1_Load;
 		base.FormClosing += Form1_FormClosing;
-		sm = new Process();
+		Sm = new Process();
 		setromdir = new FolderBrowserDialog();
 		InitializeComponent();
 	}
@@ -469,12 +467,12 @@ public class Form1 : Form
 		this.Button3 = new System.Windows.Forms.Button();
 		this.SuspendLayout();
 		System.Windows.Forms.TextBox textBox = this.TextBox1;
-		System.Drawing.Point location = new System.Drawing.Point(13, 409);
+		System.Drawing.Point location = new(13, 409);
 		textBox.Location = location;
 		this.TextBox1.Multiline = true;
 		this.TextBox1.Name = "TextBox1";
 		System.Windows.Forms.TextBox textBox2 = this.TextBox1;
-		System.Drawing.Size size = new System.Drawing.Size(709, 105);
+		System.Drawing.Size size = new(709, 105);
 		textBox2.Size = size;
 		this.TextBox1.TabIndex = 0;
 		this.ListBox1.FormattingEnabled = true;
@@ -636,7 +634,7 @@ public class Form1 : Form
 		this.Button3.TabIndex = 17;
 		this.Button3.Text = "Browse";
 		this.Button3.UseVisualStyleBackColor = true;
-		System.Drawing.SizeF sizeF = new System.Drawing.SizeF(6f, 13f);
+		System.Drawing.SizeF sizeF = new(6f, 13f);
 		this.AutoScaleDimensions = sizeF;
 		this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 		size = new System.Drawing.Size(930, 515);
@@ -679,22 +677,22 @@ public class Form1 : Form
 		{
 			romdir = MySettingsProperty.Settings.romdir;
 		}
-		sm.StartInfo.UseShellExecute = false;
-		sm.StartInfo.RedirectStandardOutput = true;
-		sm.StartInfo.RedirectStandardInput = true;
-		sm.StartInfo.RedirectStandardError = true;
-		sm.StartInfo.FileName = Application.StartupPath + "\\Supermodel.exe";
+		Sm.StartInfo.UseShellExecute = false;
+		Sm.StartInfo.RedirectStandardOutput = true;
+		Sm.StartInfo.RedirectStandardInput = true;
+		Sm.StartInfo.RedirectStandardError = true;
+		Sm.StartInfo.FileName = Application.StartupPath + "\\Supermodel.exe";
 		if (!File.Exists(Application.StartupPath + "\\Supermodel.exe"))
 		{
 			Interaction.MsgBox("Supermodel not foundPlease ensure the GUI resides in your Supermodel directory", MsgBoxStyle.Critical, Text);
 			return;
 		}
-		sm.StartInfo.Arguments = "-print-games";
-		sm.StartInfo.CreateNoWindow = true;
-		sm.Start();
-		while (!sm.StandardOutput.EndOfStream)
+		Sm.StartInfo.Arguments = "-print-games";
+		Sm.StartInfo.CreateNoWindow = true;
+		Sm.Start();
+		while (!Sm.StandardOutput.EndOfStream)
 		{
-			ListBox1.Items.Add(sm.StandardOutput.ReadLine());
+			ListBox1.Items.Add(Sm.StandardOutput.ReadLine());
 		}
 		r = ListBox1.Items.ToString().Replace("Car", "Call");
 	}
@@ -702,9 +700,8 @@ public class Form1 : Form
 	private void Button1_Click(object sender, EventArgs e)
 	{
 		setromdir.Description = "Please select your ROM directory";
-		DialogResult dialogResult = default(DialogResult);
-		dialogResult = setromdir.ShowDialog();
-		if (dialogResult == DialogResult.OK)
+        DialogResult dialogResult = setromdir.ShowDialog();
+        if (dialogResult == DialogResult.OK)
 		{
 			romdir = setromdir.SelectedPath;
 		}
@@ -714,107 +711,107 @@ public class Form1 : Form
 	{
 		if (ListBox1.SelectedItem.ToString().Contains("vf3"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\vf3.zip";
+			Sm.StartInfo.Arguments = romdir + "\\vf3.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("lemans24"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\lemans24.zip";
+			Sm.StartInfo.Arguments = romdir + "\\lemans24.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("scud") && !ListBox1.SelectedItem.ToString().Contains("Plus"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\scud.zip";
+			Sm.StartInfo.Arguments = romdir + "\\scud.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("Plus"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\scudp.zip";
+			Sm.StartInfo.Arguments = romdir + "\\scudp.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("lostwsga"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\lostwsga.zip";
+			Sm.StartInfo.Arguments = romdir + "\\lostwsga.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("von2"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\von2.zip";
+			Sm.StartInfo.Arguments = romdir + "\\von2.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("vs298"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\vs298.zip";
+			Sm.StartInfo.Arguments = romdir + "\\vs298.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("srally2"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\srally2.zip";
+			Sm.StartInfo.Arguments = romdir + "\\srally2.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("daytona2"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\daytona2.zip";
+			Sm.StartInfo.Arguments = romdir + "\\daytona2.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("dayto2pe"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\dayto2pe.zip";
+			Sm.StartInfo.Arguments = romdir + "\\dayto2pe.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("fvipers2"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\fvipers2.zip";
+			Sm.StartInfo.Arguments = romdir + "\\fvipers2.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("eca"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\eca.zip";
+			Sm.StartInfo.Arguments = romdir + "\\eca.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("oceanhun"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\oceanhun.zip";
+			Sm.StartInfo.Arguments = romdir + "\\oceanhun.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("harley"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\harley.zip";
+			Sm.StartInfo.Arguments = romdir + "\\harley.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("lamachin"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\lamachin.zip";
+			Sm.StartInfo.Arguments = romdir + "\\lamachin.zip";
 		}
 		else if (ListBox1.SelectedItem.ToString().Contains("swtrilgy"))
 		{
-			sm.StartInfo.Arguments = romdir + "\\swtrilgy.zip";
+			Sm.StartInfo.Arguments = romdir + "\\swtrilgy.zip";
 		}
 		if (CheckBox1.Checked)
 		{
-			sm.StartInfo.Arguments = sm.StartInfo.Arguments + " -fullscreen";
+			Sm.StartInfo.Arguments = Sm.StartInfo.Arguments + " -fullscreen";
 		}
 		if (CheckBox2.Checked)
 		{
-			sm.StartInfo.Arguments = sm.StartInfo.Arguments + " -no-throttle";
+			Sm.StartInfo.Arguments = Sm.StartInfo.Arguments + " -no-throttle";
 		}
 		if (CheckBox3.Checked)
 		{
-			sm.StartInfo.Arguments = sm.StartInfo.Arguments + " -show-fps";
+			Sm.StartInfo.Arguments = Sm.StartInfo.Arguments + " -show-fps";
 		}
 		if (CheckBox4.Checked && Versioned.IsNumeric(TextBox2.Text) && Versioned.IsNumeric(TextBox3.Text))
 		{
-			sm.StartInfo.Arguments = sm.StartInfo.Arguments + "res=" + TextBox2.Text + "," + TextBox3.Text;
+			Sm.StartInfo.Arguments = Sm.StartInfo.Arguments + "res=" + TextBox2.Text + "," + TextBox3.Text;
 		}
 		if (CheckBox5.Checked && Operators.CompareString(TextBox4.Text, "", TextCompare: false) != 0)
 		{
-			sm.StartInfo.Arguments = sm.StartInfo.Arguments + " -ppc-frequency=" + TextBox4.Text;
+			Sm.StartInfo.Arguments = Sm.StartInfo.Arguments + " -ppc-frequency=" + TextBox4.Text;
 		}
 		if (Operators.CompareString(TextBox5.Text, "", TextCompare: false) != 0)
 		{
-			sm.StartInfo.Arguments = sm.StartInfo.Arguments + "-frag-shader=" + TextBox5.Text;
+			Sm.StartInfo.Arguments = Sm.StartInfo.Arguments + "-frag-shader=" + TextBox5.Text;
 		}
-		sm.EnableRaisingEvents = true;
-		sm.Start();
-		if (sm.StandardError.Peek() != -1)
+		Sm.EnableRaisingEvents = true;
+		Sm.Start();
+		if (Sm.StandardError.Peek() != -1)
 		{
-			TextBox1.Text = sm.StandardError.ReadToEnd();
+			TextBox1.Text = Sm.StandardError.ReadToEnd();
 		}
 	}
 
 	private void Button2_Click(object sender, EventArgs e)
 	{
-		sm.StartInfo.Arguments = "-config-inputs";
-		sm.Start();
-		while (sm.StandardOutput.Peek() != -1)
+		Sm.StartInfo.Arguments = "-config-inputs";
+		Sm.Start();
+		while (Sm.StandardOutput.Peek() != -1)
 		{
-			TextBox1.Text += sm.StandardOutput.ReadLine();
+			TextBox1.Text += Sm.StandardOutput.ReadLine();
 		}
 	}
 
@@ -913,12 +910,13 @@ public class Form1 : Form
 
 	private void Button3_Click(object sender, EventArgs e)
 	{
-		OpenFileDialog openFileDialog = new OpenFileDialog();
-		DialogResult dialogResult = default(DialogResult);
-		openFileDialog.Title = "Select a Fragment Shader";
-		openFileDialog.Filter = "OpenGL Shaders (*.glsl)|*.glsl";
-		dialogResult = openFileDialog.ShowDialog();
-		if (dialogResult == DialogResult.OK)
+        OpenFileDialog openFileDialog = new()
+        {
+            Title = "Select a Fragment Shader",
+            Filter = "OpenGL Shaders (*.glsl)|*.glsl"
+        };
+        DialogResult dialogResult = openFileDialog.ShowDialog();
+        if (dialogResult == DialogResult.OK)
 		{
 			TextBox5.Text = openFileDialog.FileName;
 		}

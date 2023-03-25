@@ -4,15 +4,16 @@
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>True</UseWindowsForms>
-    <TargetFramework>net20</TargetFramework>
-    <PlatformTarget>x86</PlatformTarget>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>11.0</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationIcon>smgui.ico</ApplicationIcon>
+    <StartupObject>smgui.My.MyApplication</StartupObject>
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
